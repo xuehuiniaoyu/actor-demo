@@ -10,15 +10,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        findViewById<View>(R.id.loadComponentLocal).setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java).also {
-                it.putExtra("local", true)
-            })
-        }
-        findViewById<View>(R.id.loadComponentApp).setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java).also {
-                it.putExtra("local", false)
-            })
+        findViewById<View>(R.id.loadComponent).setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 }

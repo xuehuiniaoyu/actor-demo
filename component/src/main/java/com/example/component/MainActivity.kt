@@ -1,63 +1,46 @@
 package com.example.component
 
 import android.os.Bundle
-import android.view.View
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.component.entity.MyAPIRequestEntity
-import com.example.component.entity.MyAPIResponseEntity
-import com.example.component.entity.MyAPICallback
-import com.example.component.entity.MyLogCallback
+import xuehuiniaoyu.github.io.actor.Actor
+import xuehuiniaoyu.github.io.actor.ActorBean
+import xuehuiniaoyu.github.io.actor.di.DynamicImplementation
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        const val TAG = "component-main"
+    interface APIKitProxy {
+        fun callApi(key: String, @DynamicImplementation contract: Any)
     }
-    private val fromLocal by lazy { intent.getBooleanExtra("local", false) }
-    private val apiKitTrusteeship by lazy { APIKitTrusteeshipImpl().getActor(fromLocal) }
+
+    interface APIContractProxy {
+        fun getApiKey(): String
+        fun onSuccess(response: Any)
+        fun onFail()
+    }
+
+    private val apiKit by lazy {
+        Actor(
+            ActorBean(applicationContext).get("apiKit") ?: error("")
+        ).imitate(APIKitProxy::class.java)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.component_main)
-        this.findViewById<View>(R.id.btnCallApi).setOnClickListener {
-            callSuccessAPI()
+        findViewById<Button>(R.id.btnCallApi).setOnClickListener {
+            apiKit.callApi("data", object: APIContractProxy {
+                override fun getApiKey(): String = "api1"
+
+                override fun onSuccess(response: Any) {
+                    val data = ActorBean(response).get<String>("data")
+                    findViewById<TextView>(R.id.txtData).text = data
+                }
+
+                override fun onFail() {
+                    findViewById<TextView>(R.id.txtData).text = "api call fail"
+                }
+            })
         }
-        this.findViewById<View>(R.id.btnCallApiFail).setOnClickListener {
-            callFailAPI()
-        }
-        this.findViewById<View>(R.id.btnShowLog).setOnClickListener {
-            showLog()
-        }
-    }
-
-    fun showLog() {
-        apiKitTrusteeship.log("hello world!", object : MyLogCallback {
-            override fun log(log: String) {
-                findViewById<TextView>(R.id.txtShowLog).text = log
-            }
-        })
-    }
-
-    fun callSuccessAPI() {
-        apiKitTrusteeship.callApi(MyAPIRequestEntity("POST", "http://api.login"), object: MyAPICallback {
-            override fun onSuccess(entity: MyAPIResponseEntity) {
-                findViewById<TextView>(R.id.txtCallApi).text = "${entity.data}"
-            }
-
-            override fun onFail() {
-                findViewById<TextView>(R.id.txtCallApi).text = "call api is fail"
-            }
-        })
-    }
-
-    fun callFailAPI() {
-        apiKitTrusteeship.callApi(MyAPIRequestEntity("POST", "onFail"), object: MyAPICallback {
-            override fun onSuccess(entity: MyAPIResponseEntity) {
-                findViewById<TextView>(R.id.txtCallApi).text = "${entity.data}"
-            }
-
-            override fun onFail() {
-                findViewById<TextView>(R.id.txtCallApi).text = "call api is fail"
-            }
-        })
     }
 }

@@ -6,62 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnShowLog"
-        android:textAllCaps="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="show log"
-        app:layout_constraintVertical_bias="1"
-        app:layout_constraintBottom_toTopOf="@id/btnCallApi"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txtShowLog"
-        app:layout_constraintStart_toStartOf="@id/btnShowLog"
-        app:layout_constraintEnd_toEndOf="@id/btnShowLog"
-        app:layout_constraintBottom_toTopOf="@id/btnShowLog"
-        android:text="--"
-        android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+    <androidx.core.widget.NestedScrollView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/txtData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </androidx.core.widget.NestedScrollView>
 
     <Button
         android:id="@+id/btnCallApi"
         android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="success-api-call"
-        android:layout_marginTop="20dp"
-        app:layout_constraintVertical_bias="0"
+        android:text="call api"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnShowLog" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnCallApiFail"
-        android:textAllCaps="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="fail-api-call"
-        android:layout_marginTop="20dp"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnCallApi" />
 
-    <TextView
-        android:id="@+id/txtCallApi"
-        app:layout_constraintStart_toStartOf="@id/btnCallApi"
-        app:layout_constraintEnd_toEndOf="@id/btnCallApi"
-        app:layout_constraintBottom_toTopOf="@id/btnCallApi"
-        android:text="--"
-        android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

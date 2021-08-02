@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private val apiKit by lazy {
         Actor(
             ActorBean(applicationContext).get("apiKit") ?: error("")
-        ).imitate(APIKitProxy::class.java)
+        ).imitator(APIKitProxy::class.java)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

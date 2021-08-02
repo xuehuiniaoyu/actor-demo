@@ -4,7 +4,7 @@ How to use actor-kotlin for interaction between modules on the android side with
 https://github.com/xuehuiniaoyu/actor-kotlin
 
 ```
-implementation 'io.github.xuehuiniaoyu:actor-kotlin:2.0.2'
+implementation 'io.github.xuehuiniaoyu:actor-kotlin:2.1.0'
 ```
 
 ## Java动态伪装工具，能够用伪装接口代理真实对象。
@@ -122,6 +122,6 @@ val callback = object: Interface2 {
     }
 }
 
-val proxy = Actor(Kit()).imitate(KitProxy::class.java)
+val proxy = Actor(Kit()).imitator(KitProxy::class.java)
 proxy.call("hello", callback)
 ```

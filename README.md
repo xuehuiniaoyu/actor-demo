@@ -1,6 +1,8 @@
 # actor-demo
 How to use actors for interaction between modules on the android side without adding injection code to the main module (:app)
 
+https://github.com/xuehuiniaoyu/actor-kotlin
+
 ```
 implementation 'io.github.xuehuiniaoyu:actor-kotlin:2.0.2'
 ```
@@ -8,8 +10,6 @@ implementation 'io.github.xuehuiniaoyu:actor-kotlin:2.0.2'
 ## Java动态伪装工具，能够用伪装接口代理真实对象。
 
 纯Kotlin开发，使用简单但功能强大，可用于组件化开发或插件化项目开发。
-
-Android Demo: [https://github.com/xuehuiniaoyu/actor-demo]()
 
 #### 1. ActorBean
 ActorBean：对象反射工具，不仅有get/set方法，还能把对象抽象到接口，方便集成。

@@ -1,5 +1,5 @@
 # actor-demo
-How to use actors for interaction between modules on the android side without adding injection code to the main module (:app)
+How to use actor-kotlin for interaction between modules on the android side without adding injection code to the main module (:app)
 
 https://github.com/xuehuiniaoyu/actor-kotlin
 
